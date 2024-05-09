@@ -1,0 +1,1 @@
+export type Replace<T, R> = Omit<T, keyof R> & R; // É uma função de auxilio que pode ser utilizada para tornar variaveis não opcionais em opcionais

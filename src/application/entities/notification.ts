@@ -1,3 +1,4 @@
+import { Replace } from "src/helpers/Replace";
 import { Content } from "./content";
 
 export interface NotificationProps { // Interface criada para evitar conflitos dentro da classe, e para facilitar a criação de setters e getters
@@ -9,11 +10,19 @@ export interface NotificationProps { // Interface criada para evitar conflitos d
     createdAt: Date;
 }
 
+
+
 export class Notification {
     private props:  NotificationProps;
-    constructor(props: NotificationProps){
-        this.props = props;
+
+    constructor(props: Replace<NotificationProps, {createdAt?: Date}>){ // Após criar um helper com o Replace é assim que se utiliza ele para tornar uma variavel opcional
+        this.props = {
+            ...props,
+            createdAt: props.createdAt ?? new Date(),
+        }; // E é assim que se declara dentro do construtor
     }
+    
+    
 
     public set recipientID(recipientID: string){
         this.props.recipientID = recipientID // Nova após a criação da interface
