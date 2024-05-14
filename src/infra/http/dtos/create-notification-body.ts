@@ -3,12 +3,12 @@ import { IsNotEmpty, IsUUID, Length } from "class-validator"
 export class CreateNotificationBody{
     @IsNotEmpty()
     @IsUUID()
-    recipientID: string = ''
+    recipientID: string
 
     @IsNotEmpty()
     @Length(5, 240) //Decorator que define nmr min e max de caracteres
-    content: string = ''
+    content: string
 
     @IsNotEmpty()
-    category: string = ''
+    category: string
 }
