@@ -1,5 +1,6 @@
 import { Replace } from "src/helpers/Replace";
 import { Content } from "./content";
+import { randomUUID } from "node:crypto";
 
 export interface NotificationProps { // Interface criada para evitar conflitos dentro da classe, e para facilitar a criação de setters e getters
     recipientID: string;
@@ -13,16 +14,20 @@ export interface NotificationProps { // Interface criada para evitar conflitos d
 
 
 export class Notification {
+    private _id: string;
     private props:  NotificationProps;
 
     constructor(props: Replace<NotificationProps, {createdAt?: Date}>){ // Após criar um helper com o Replace é assim que se utiliza ele para tornar uma variavel opcional
+        this._id = randomUUID();
         this.props = {
             ...props,
             createdAt: props.createdAt ?? new Date(),
         }; // E é assim que se declara dentro do construtor
     }
     
-    
+    public get id(){
+        return this._id;
+    }
 
     public set recipientID(recipientID: string){
         this.props.recipientID = recipientID // Nova após a criação da interface
@@ -30,6 +35,14 @@ export class Notification {
 
     public get recipientID(): string{
     return this.props.recipientID;
+    }
+
+    public set category(category: string){
+        this.props.category = category 
+    }
+
+    public get category(): string{
+    return this.props.category;
     }
 
     public set content(content: Content){
