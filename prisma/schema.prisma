@@ -16,6 +16,7 @@ model Notification {
   content     String
   category    String
   readAt      DateTime? // o ? faz com que seja uma variavel que suporte o estado nulo
+  canceledAt  DateTime?
   createdAt   DateTime  @default(now()) // seta como padrão o horario atual caso não seja informado
 
   @@index([recipientID]) //criação de um indice

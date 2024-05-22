@@ -8,6 +8,7 @@ export interface NotificationProps { // Interface criada para evitar conflitos d
     category: string;
     readAt?: Date | null; // Esse é identado ?: pois é um parametro opcional, basicamente esta dizendo para o codigo que ele é tipo
                           // "Date", "undifined" ou "Nulo", se não houvesse o | não consideraria nulo
+    canceledAt?: Date | null;
     createdAt: Date;
 }
 
@@ -61,6 +62,14 @@ export class Notification {
     public get readAt(): Date | null | undefined {
     return this.props.readAt;
     }
+
+    public cancel(){
+        this.props.canceledAt = new Date();
+    }
+
+    public get canceledAt(): Date | null | undefined {
+        return this.props.canceledAt;
+        }
 
     public get createdAt(): Date{
     return this.props.createdAt;

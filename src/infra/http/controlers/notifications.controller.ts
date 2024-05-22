@@ -1,6 +1,7 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { CreateNotificationBody } from '../dtos/create-notification-body';
-import { SendNotification } from 'src/application/use-cases/send-notification';
+import { SendNotification } from '@application/use-cases/send-notification';
+import { NotificationViewModel } from '../dtos/view-models/notification-view-model';
 
 @Controller("notifications") // Se for colocado algo dentro desse decorator como "app", vai ser necessário expecificar na URL final, nesse caso seris "localhost:3000/app" 
 export class NotificationsController {
@@ -16,6 +17,8 @@ export class NotificationsController {
       category,
     });
 
-    return {notification};
+    return {
+      notification: NotificationViewModel.toHTTP(notification),
+    };
   }
 }

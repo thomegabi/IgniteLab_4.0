@@ -15,7 +15,7 @@ interface SendNotificationResponse{
 
 @Injectable() // necessário para fazer injeção de dados pelo framework
 export class SendNotification{
-    constructor(private notificationrepository: NotificationRepository) {}
+    constructor(private notificationRepository: NotificationRepository) {}
 
 
     async execute(request: SendNotificationRequest): Promise<SendNotificationResponse> { // O promisse é necessário pois é uma função asincrona
@@ -27,7 +27,7 @@ export class SendNotification{
             category,
         });
 
-        await this.notificationrepository.create(notification);
+        await this.notificationRepository.create(notification);
 
         return{
             notification,
