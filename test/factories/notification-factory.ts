@@ -3,7 +3,7 @@ import { Notification, NotificationProps } from "@application/entities/notificat
 
 type Override = Partial<NotificationProps> // O Partial serve para poder passar o NotificationProps sem a necessiade de passar todos os atributos
 
-export function makeNotification(override: Override){
+export function makeNotification(override: Override = {}){
   return new Notification({
     content: new Content('Nova Solicitação de amizade!'),
     category: 'social', 
