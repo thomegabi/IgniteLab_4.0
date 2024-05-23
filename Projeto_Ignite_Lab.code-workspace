@@ -1,0 +1,15 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			".env.*": "dotenv",
+			".prettierrc": "json",
+			"*.css": "css",
+			"iostream": "cpp"
+		}
+	}
+}

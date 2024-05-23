@@ -3,18 +3,40 @@ import { NotificationRepository } from "@application/repositories/notification-r
 
 
 
-export class InMemoryNotificationRepository implements NotificationRepository {
-    
+export class InMemoryNotificationRepository implements NotificationRepository { // Ela implementa o repositorio das notificações
+
+    async findById(notificationID: string): Promise<Notification | null> {
+        const notification = this.notifications.find(
+            (item) => item.id == notificationID,
+        );
+
+        if(!notification){
+            return null;
+        }
+
+        return notification;
+    } 
+
+    async countManyByRecipientId(recipientID: string): Promise<number> {
+        return this.notifications.filter(
+            notification => notification.recipientID == recipientID
+        ).length;
+    }
+
     async create(notification: Notification){
         this.notifications.push(notification);
     }
 
-    save(notification: Notification): Promise<void> {
-        throw new Error("Method not implemented.");
+    async save(notification: Notification): Promise<void> { // Retorna o indice dentro do array onde o id da notificação é o msm ta notificação que esta tentando salvar
+        const notificationIndex = this.notifications.findIndex(
+            (item) => item.id == notification.id,
+        );
+
+        if (notificationIndex >= 0){
+            this.notifications[notificationIndex] = notification; // sobrepõe a notificação existente com a nova
+        }
     }
 
-    async findById(notificationID: string): Promise<Notification | null> {
-        throw new Error("Method not implemented.");
-    } // Ela implementa o repositorio das notificações
+    
     public notifications: Notification[] = [];
 }
