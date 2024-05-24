@@ -4,6 +4,7 @@ import { NotificationRepository } from "@application/repositories/notification-r
 
 
 export class InMemoryNotificationRepository implements NotificationRepository { // Ela implementa o repositorio das notificações
+    
 
     async findById(notificationID: string): Promise<Notification | null> {
         const notification = this.notifications.find(
@@ -15,6 +16,12 @@ export class InMemoryNotificationRepository implements NotificationRepository { 
         }
 
         return notification;
+    } 
+
+    async findManyByRecipientId(recipientID: string): Promise<Notification[]> {
+        return this.notifications.filter(
+            (notification) => notification.recipientID == recipientID,
+        );
     } 
 
     async countManyByRecipientId(recipientID: string): Promise<number> {
