@@ -18,8 +18,10 @@ export class Notification {
     private _id: string;
     private props:  NotificationProps;
 
-    constructor(props: Replace<NotificationProps, {createdAt?: Date}>){ // Após criar um helper com o Replace é assim que se utiliza ele para tornar uma variavel opcional
-        this._id = randomUUID();
+    constructor(props: Replace<NotificationProps, {createdAt?: Date}>,
+        id?: string, // Aqui isso é feito para dizer que caso ja exista um ID não é necessário criar um novo
+    ){ // Após criar um helper com o Replace é assim que se utiliza ele para tornar uma variavel opcional
+        this._id = id ?? randomUUID(); // Deve ser idenrtado dessa forma para comparar se existe ou não
         this.props = {
             ...props,
             createdAt: props.createdAt ?? new Date(),
